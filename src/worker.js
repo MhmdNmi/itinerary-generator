@@ -10,8 +10,11 @@ export default {
 		}
 
 		const { destination, durationDays } = body;
-		if (!destination || typeof destination !== "string" || !Number.isInteger(durationDays) || durationDays <= 0) {
-			return jsonResponse({ error: 'Fields destination (string) and durationDays (positive integer) are required!' }, 400);
+		if (!destination || typeof destination !== "string") {
+			return jsonResponse({ error: 'Field destination (string) is required!' }, 400);
+		}
+		if (!Number.isInteger(durationDays) || durationDays <= 0) {
+			return jsonResponse({ error: 'Field durationDays (positive integer) is required!' }, 400);
 		}
 
 		const jobId = crypto.randomUUID();
